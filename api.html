@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Status</title>
+    <style>
+        body {
+            font-family: monospace;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .json-container {
+            background-color: #252526;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid #333;
+            min-width: 300px;
+        }
+
+        .key {
+            color: #9cdcfe;
+        }
+
+        .string {
+            color: #ce9178;
+        }
+
+        .number {
+            color: #b5cea8;
+        }
+
+        .boolean {
+            color: #569cd6;
+        }
+
+        .btn-back {
+            display: block;
+            margin-top: 1.5rem;
+            text-align: center;
+            color: #569cd6;
+            text-decoration: none;
+            font-family: sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .btn-back:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="json-container">
+        <div>{</div>
+        <div style="padding-left: 20px;">
+            <span class="key">"service"</span>: <span class="string">"ICE-GitOps-API"</span>,
+        </div>
+        <div style="padding-left: 20px;">
+            <span class="key">"status"</span>: <span class="string">"operational"</span>,
+        </div>
+        <div style="padding-left: 20px;">
+            <span class="key">"version"</span>: <span class="string">"v1.0.0"</span>,
+        </div>
+        <div style="padding-left: 20px;">
+            <span class="key">"healthy"</span>: <span class="boolean">true</span>,
+        </div>
+        <div style="padding-left: 20px;">
+            <span class="key">"latency_ms"</span>: <span class="number">12</span>
+        </div>
+        <div>}</div>
+
+        <a href="index.html" class="btn-back">← Back to Dashboard</a>
+    </div>
+</body>
+
+</html>
