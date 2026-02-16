@@ -16,7 +16,7 @@
     }
 
     body {
-      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       margin: 0;
       padding: 0;
       background-color: var(--bg-color);
@@ -30,19 +30,34 @@
       padding: 2rem 1rem;
       text-align: center;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-container {
+      margin-bottom: 1rem;
+    }
+
+    .logo-img {
+      height: 80px;
+      width: auto;
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
     }
 
     h1 {
       margin: 0;
-      font-size: 2.5rem;
+      font-size: 2.2rem;
       font-weight: 700;
     }
 
     .subtitle {
       margin-top: 0.5rem;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       opacity: 0.9;
       color: var(--secondary-color);
+      font-weight: 500;
     }
 
     main {
@@ -56,19 +71,39 @@
       border-radius: 12px;
       padding: 2rem;
       margin-bottom: 2rem;
-      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
       transition: transform 0.2s;
+      border-top: 4px solid transparent;
     }
 
     .card:hover {
       transform: translateY(-5px);
     }
 
+    .card.intro {
+      border-top-color: var(--primary-color);
+    }
+
+    .card.features {
+      border-top-color: var(--secondary-color);
+    }
+
+    .card.start {
+      border-top-color: #28a745;
+    }
+
+    .card.contributors {
+      border-top-color: #6c757d;
+    }
+
     h2 {
-      border-bottom: 2px solid var(--secondary-color);
-      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 0.8rem;
       margin-top: 0;
       color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     ul {
@@ -93,51 +128,93 @@
     .btn-container {
       text-align: center;
       margin-top: 3rem;
+      margin-bottom: 3rem;
     }
 
     .btn {
       display: inline-block;
       background-color: var(--primary-color);
       color: white;
-      padding: 1rem 2rem;
+      padding: 1rem 2.5rem;
       border-radius: 50px;
       text-decoration: none;
       font-weight: bold;
       font-size: 1.1rem;
-      transition: background-color 0.3s, transform 0.3s;
-      box-shadow: 0 4px 10px rgba(0, 44, 95, 0.3);
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(0, 44, 95, 0.3);
     }
 
     .btn:hover {
       background-color: #004080;
       transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0, 44, 95, 0.4);
     }
 
     footer {
       text-align: center;
-      padding: 2rem;
+      padding: 3rem 1rem;
       color: #666;
       font-size: 0.9rem;
       border-top: 1px solid #eee;
-      margin-top: 4rem;
+      background-color: #fff;
+    }
+
+    .contributor-list li {
+      padding-left: 0;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .contributor-list li::before {
+      content: none;
+    }
+
+    .contributor-badge {
+      display: inline-block;
+      background-color: #eee;
+      color: #555;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      margin-right: 0.8rem;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .contributor-name {
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+
+    .lab-title {
+      font-weight: bold;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+      display: block;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 0.5rem;
     }
   </style>
 </head>
 
 <body>
   <header>
+    <div class="logo-container">
+      <img src="hufs_logo.png" alt="HUFS Logo" class="logo-img">
+    </div>
     <h1>ICE GitOps Service</h1>
     <div class="subtitle">Hankuk University of Foreign Studies</div>
   </header>
 
   <main>
-    <div class="card">
+    <div class="card intro">
       <h2>👋 환영합니다!</h2>
       <p><strong>정보통신공학과 학생 여러분을 위한 자동화 배포 시스템</strong>입니다.<br>
         복잡한 인프라 설정 없이, 코드만 작성하면 자동으로 도메인 연결과 SSL 보안 적용까지 완료됩니다.</p>
     </div>
 
-    <div class="card">
+    <div class="card features">
       <h2>✨ 주요 기능</h2>
       <ul>
         <li><strong>Automated CI/CD</strong>: GitHub Push 한 번으로 빌드부터 배포까지 자동화</li>
@@ -147,27 +224,43 @@
       </ul>
     </div>
 
-    <div class="card">
+    <div class="card start">
       <h2>🚀 시작하기</h2>
       <p>지금 바로 자신만의 프로젝트를 시작해보세요. 템플릿을 복사하고, 코드를 작성하면 끝입니다. 인프라는 저희가 담당합니다.</p>
-      <div class="card">
-        <h2>👨‍💻 만든 사람들</h2>
-        <p style="margin-bottom: 1rem; color: #555;"><strong>한국외국어대학교 정보통신공학과 ESE Lab 서버관리자</strong></p>
-        <ul style="list-style: none; padding-left: 0;">
-          <li style="padding-left: 0;">&bull; 한국외대 정보통신공학과 20학번 <strong>이해준</strong></li>
-          <li style="padding-left: 0;">&bull; 한국외대 정보통신공학과 21학번 <strong>고태규</strong></li>
-          <li style="padding-left: 0;">&bull; 한국외대 정보통신공학과 22학번 <strong>김건우</strong></li>
-        </ul>
-      </div>
+    </div>
 
-      <div class="div-container">
-        <a href="api.html" class="btn">API 상태 확인테스트 (Demo)</a>
-      </div>
+    <div class="card contributors">
+      <h2>👨‍💻 System Administrators</h2>
+      <span class="lab-title">한국외국어대학교 정보통신공학과 ESE Lab</span>
+
+      <ul class="contributor-list">
+        <li>
+          <span class="contributor-badge">20학번</span>
+          <span class="contributor-name">이해준</span>
+        </li>
+        <li>
+          <span class="contributor-badge">21학번</span>
+          <span class="contributor-name">고태규</span>
+        </li>
+        <li>
+          <span class="contributor-badge">22학번</span>
+          <span class="contributor-name">김건우</span>
+        </li>
+      </ul>
+      <p style="margin-top: 1rem; font-size: 0.9rem; color: #888;">
+        본 서비스는 ESE Lab 서버관리팀에서 운영 및 유지보수를 담당하고 있습니다.
+      </p>
+    </div>
+
+    <div class="btn-container">
+      <a href="api.html" class="btn">API 상태 확인테스트 (Demo)</a>
+    </div>
   </main>
 
   <footer>
+    <img src="hufs_logo.png" alt="HUFS Logo" style="height: 40px; opacity: 0.5; margin-bottom: 1rem;"><br>
     &copy; 2026 HUFS Dept. of Information and Communications Engineering. All rights reserved.<br>
-    Powered by Kubernetes & ArgoCD
+    Powered by Kubernetes, ArgoCD & GitHub Actions
   </footer>
 </body>
 
