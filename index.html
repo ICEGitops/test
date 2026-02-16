@@ -242,7 +242,7 @@
   <header>
     <!-- Watermark is handled by CSS -->
     <div class="header-content">
-      <img src="images/HUFS.png" alt="HUFS Logo" class="logo-img">
+      <!-- Logo removed as per request -->
       <h1>ICE GitOps Service</h1>
       <div class="subtitle">Hankuk University of Foreign Studies</div>
     </div>
@@ -267,24 +267,34 @@
 
     <div class="card start">
       <h2>🚀 시작하기 (Quick Start)</h2>
-      <p>나만의 프로젝트를 배포하는 방법은 아주 간단합니다.</p>
+      <p>나만의 프로젝트를 배포하는 방법은 간단합니다.</p>
       <ol>
         <li><strong>Code</strong>: 본인의 GitHub 계정에 <strong>Public Repository</strong>를 생성하고 코드를 작성합니다.</li>
-        <li><strong>Push</strong>: 작성한 코드를 GitHub에 `git push` 하여 업로드합니다.</li>
-        <li><strong>Contact</strong>: 관리자에게 레포지토리 주소를 전달하면, GitOps 연동 후 배포가 시작됩니다!</li>
+        <li><strong>Push</strong>: 작성한 코드를 GitHub에 git push 하여 업로드합니다.</li>
+        <li><strong>Contact</strong>: 관리자에게 레포지토리 주소를 전달하면, GitOps 연동 후 배포가 시작됩니다.</li>
       </ol>
     </div>
 
     <div class="card guide">
-      <h2>📚 CI/CD가 무엇인가요?</h2>
-      <p><strong>CI (Continuous Integration)</strong>와 <strong>CD (Continuous Deployment)</strong>는 개발자가 코드를 작성하고 배포하는
-        과정을 자동화하는 기술입니다.</p>
-      <ul>
-        <li><strong>이전에는...</strong> 코드를 다 짜고, 서버에 접속해서, 파일을 전송하고, 서버를 재시작해야 했습니다. 😫</li>
-        <li><strong>이제는!</strong> 코드를 Push하기만 하면, GitHub Actions가 알아서 테스트하고 서버에 배포해줍니다. 😎</li>
+      <h2>📚 CI/CD: 자동화의 마법</h2>
+      <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+        <img src="images/cicd.png" alt="CI/CD Architecture Flow"
+          style="width: 100%; max-width: 600px; margin-bottom: 1.5rem; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+      </div>
+
+      <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
+        <strong>"코드를 수정하고 저장(Push)만 하세요. 나머지는 저희가 합니다."</strong>
+      </p>
+
+      <ul style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px;">
+        <li style="margin-bottom: 0.5rem;"><strong>⚡ Continuous Integration (CI)</strong><br>
+          여러분이 작성한 코드가 서버에서 잘 작동하는지 <strong>자동으로 테스트</strong>합니다.</li>
+        <li><strong>🚀 Continuous Deployment (CD)</strong><br>
+          테스트가 통과되면, 실제 웹사이트에 <strong>자동으로 배포</strong>합니다. (약 3~5분 소요)</li>
       </ul>
-      <p style="margin-top: 1rem; color: #666; font-size: 0.9rem;">
-        본 서비스는 <strong>ArgoCD</strong>를 활용한 GitOps 방식을 사용하여, Git 레포지토리의 상태와 실제 서버의 상태를 항상 동일하게 유지합니다.
+
+      <p style="margin-top: 1rem; color: #666; font-size: 0.9rem; text-align: center;">
+        이 모든 과정은 <strong>GitHub Actions</strong>와 <strong>ArgoCD</strong>를 통해 투명하고 안전하게 관리됩니다.
       </p>
     </div>
 
@@ -294,8 +304,8 @@
         <span class="lab-info">한국외국어대학교 정보통신공학과 ESE Lab 서버관리자</span>
 
         <div class="contributor-item" style="border: 2px solid var(--primary-color); background-color: #f0f4ff;">
-          <span class="badge">대표관리자</span>
-          <span class="name">고태규 (21학번)</span>
+          <span class="badge" style="background-color: #002c5f;">Contact</span>
+          <span class="name">고태규 21학번 (대표관리자)</span>
           <span style="font-size: 0.85rem; color: #555; margin-left: auto;">taekueko714@hufs.ac.kr</span>
         </div>
 
