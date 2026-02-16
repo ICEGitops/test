@@ -79,7 +79,7 @@ jobs:
         working-directory: gitops/projects/${{ env.PROJECT_NAME }}
         run: |
           kustomize edit set image \
-            ghcr.io/icegitops/PROJECT_NAME=ghcr.io/icegitops/${{ env.PROJECT_NAME }}:${{ github.sha }}
+            ghcr.io/icegitops/base-image=ghcr.io/icegitops/${{ env.PROJECT_NAME }}:${{ github.sha }}
           echo "✅ Updated image tag to ${{ github.sha }}"
 
       - name: Commit and push
