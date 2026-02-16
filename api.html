@@ -7,7 +7,7 @@
     <title>API Status</title>
     <style>
         body {
-            font-family: monospace;
+            font-family: 'Consolas', 'Monaco', monospace;
             background-color: #1e1e1e;
             color: #d4d4d4;
             display: flex;
@@ -15,15 +15,21 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
         }
 
         .json-container {
             background-color: #252526;
             padding: 2rem;
             border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             border: 1px solid #333;
-            min-width: 300px;
+            position: relative;
         }
 
         .key {
@@ -42,44 +48,111 @@
             color: #569cd6;
         }
 
+        .null {
+            color: #569cd6;
+        }
+
         .btn-back {
             display: block;
-            margin-top: 1.5rem;
+            margin-top: 2rem;
             text-align: center;
             color: #569cd6;
             text-decoration: none;
             font-family: sans-serif;
             font-size: 0.9rem;
+            opacity: 0.7;
+            transition: opacity 0.2s;
         }
 
         .btn-back:hover {
+            opacity: 1;
             text-decoration: underline;
+        }
+
+        .pulse {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 10px;
+            height: 10px;
+            background-color: #4caf50;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #4caf50;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(0.8);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="json-container">
-        <div>{</div>
-        <div style="padding-left: 20px;">
-            <span class="key">"service"</span>: <span class="string">"ICE-GitOps-API"</span>,
+    <div class="container">
+        <div class="json-container" id="json-box">
+            <div class="pulse"></div>
+            <div>{</div>
+            <div style="padding-left: 20px;">
+                <span class="key">"service"</span>: <span class="string">"ICE-GitOps-API"</span>,
+            </div>
+            <div style="padding-left: 20px;">
+                <span class="key">"status"</span>: <span class="string">"operational"</span>,
+            </div>
+            <div style="padding-left: 20px;">
+                <span class="key">"version"</span>: <span class="string">"v1.2.0"</span>,
+            </div>
+            <div style="padding-left: 20px;">
+                <span class="key">"timestamp"</span>: <span class="string" id="timestamp">"..."</span>,
+            </div>
+            <div style="padding-left: 20px;">
+                <span class="key">"request_id"</span>: <span class="string" id="req-id">"..."</span>,
+            </div>
+            <div style="padding-left: 20px;">
+                <span class="key">"healthy"</span>: <span class="boolean">true</span>,
+            </div>
+            <div style="padding-left: 20px;">
+                <span class="key">"active_connections"</span>: <span class="number" id="connections">0</span>,
+            </div>
+            <div style="padding-left: 20px;">
+                <span class="key">"latency_ms"</span>: <span class="number" id="latency">0</span>
+            </div>
+            <div>}</div>
         </div>
-        <div style="padding-left: 20px;">
-            <span class="key">"status"</span>: <span class="string">"operational"</span>,
-        </div>
-        <div style="padding-left: 20px;">
-            <span class="key">"version"</span>: <span class="string">"v1.0.0"</span>,
-        </div>
-        <div style="padding-left: 20px;">
-            <span class="key">"healthy"</span>: <span class="boolean">true</span>,
-        </div>
-        <div style="padding-left: 20px;">
-            <span class="key">"latency_ms"</span>: <span class="number">12</span>
-        </div>
-        <div>}</div>
 
         <a href="index.html" class="btn-back">← Back to Dashboard</a>
     </div>
+
+    <script>
+        function updateData() {
+            const now = new Date();
+            document.getElementById('timestamp').textContent = `"${now.toISOString()}"`;
+            document.getElementById('req-id').textContent = `"${crypto.randomUUID()}"`;
+
+            // Randomize dynamic values
+            const latency = Math.floor(Math.random() * 40) + 5; // 5-45ms
+            document.getElementById('latency').textContent = latency;
+
+            const connections = Math.floor(Math.random() * 100) + 20;
+            document.getElementById('connections').textContent = connections;
+        }
+
+        updateData();
+        // Update every 2 seconds to show liveness
+        setInterval(updateData, 2000);
+    </script>
 </body>
 
 </html>

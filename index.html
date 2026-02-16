@@ -27,57 +27,83 @@
     header {
       background-color: var(--primary-color);
       color: white;
-      padding: 2rem 1rem;
+      padding: 3rem 1rem;
       text-align: center;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Watermark Logo Effect */
+    header::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 300px;
+      height: 300px;
+      background-image: url('hufs_logo.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 0.1;
+      /* Transparent watermark */
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-    }
-
-    .logo-container {
-      margin-bottom: 1rem;
     }
 
     .logo-img {
-      height: 80px;
+      height: 100px;
       width: auto;
-      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+      margin-bottom: 1.5rem;
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
     }
 
     h1 {
       margin: 0;
-      font-size: 2.2rem;
-      font-weight: 700;
+      font-size: 2.5rem;
+      font-weight: 800;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     }
 
     .subtitle {
       margin-top: 0.5rem;
-      font-size: 1.1rem;
-      opacity: 0.9;
+      font-size: 1.2rem;
       color: var(--secondary-color);
       font-weight: 500;
+      letter-spacing: 0.5px;
     }
 
     main {
       max-width: 800px;
-      margin: 3rem auto;
+      margin: -2rem auto 3rem;
+      /* Overlap header */
       padding: 0 1rem;
+      position: relative;
+      z-index: 2;
     }
 
     .card {
       background: white;
-      border-radius: 12px;
-      padding: 2rem;
+      border-radius: 16px;
+      padding: 2.5rem;
       margin-bottom: 2rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-      transition: transform 0.2s;
-      border-top: 4px solid transparent;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+      border-top: 5px solid transparent;
     }
 
     .card:hover {
       transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
     }
 
     .card.intro {
@@ -97,13 +123,11 @@
     }
 
     h2 {
-      border-bottom: 2px solid #eee;
+      border-bottom: 2px solid #f0f0f0;
       padding-bottom: 0.8rem;
       margin-top: 0;
       color: var(--primary-color);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      font-weight: 700;
     }
 
     ul {
@@ -118,7 +142,7 @@
     }
 
     li::before {
-      content: "✓";
+      content: "✔";
       color: var(--secondary-color);
       position: absolute;
       left: 0;
@@ -128,14 +152,14 @@
     .btn-container {
       text-align: center;
       margin-top: 3rem;
-      margin-bottom: 3rem;
+      margin-bottom: 4rem;
     }
 
     .btn {
       display: inline-block;
-      background-color: var(--primary-color);
+      background: linear-gradient(135deg, var(--primary-color), #004080);
       color: white;
-      padding: 1rem 2.5rem;
+      padding: 1.2rem 3rem;
       border-radius: 50px;
       text-decoration: none;
       font-weight: bold;
@@ -145,73 +169,82 @@
     }
 
     .btn:hover {
-      background-color: #004080;
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(0, 44, 95, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 44, 95, 0.4);
     }
 
-    footer {
-      text-align: center;
-      padding: 3rem 1rem;
-      color: #666;
-      font-size: 0.9rem;
-      border-top: 1px solid #eee;
-      background-color: #fff;
+    /* Contributors Section Styling */
+    .contributors-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
     }
 
-    .contributor-list li {
-      padding-left: 0;
+    .lab-info {
+      font-weight: bold;
+      color: var(--primary-color);
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #eee;
+      display: block;
       margin-bottom: 0.5rem;
+    }
+
+    .contributor-item {
       display: flex;
       align-items: center;
+      padding: 0.5rem;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      transition: background-color 0.2s;
     }
 
-    .contributor-list li::before {
-      content: none;
+    .contributor-item:hover {
+      background-color: #e9ecef;
     }
 
-    .contributor-badge {
-      display: inline-block;
-      background-color: #eee;
-      color: #555;
-      padding: 0.2rem 0.6rem;
+    .badge {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 0.25rem 0.6rem;
       border-radius: 4px;
       font-size: 0.8rem;
-      margin-right: 0.8rem;
+      font-weight: bold;
+      margin-right: 1rem;
       min-width: 60px;
       text-align: center;
     }
 
-    .contributor-name {
-      font-weight: bold;
-      color: var(--primary-color);
+    .name {
+      font-weight: 600;
+      color: #333;
     }
 
-    .lab-title {
-      font-weight: bold;
-      color: var(--primary-color);
-      margin-bottom: 1rem;
-      display: block;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 0.5rem;
+    footer {
+      text-align: center;
+      padding: 4rem 1rem 2rem;
+      color: #888;
+      font-size: 0.9rem;
+      background-color: #fff;
+      border-top: 1px solid #eee;
     }
   </style>
 </head>
 
 <body>
   <header>
-    <div class="logo-container">
+    <!-- Watermark is handled by CSS -->
+    <div class="header-content">
       <img src="hufs_logo.png" alt="HUFS Logo" class="logo-img">
+      <h1>ICE GitOps Service</h1>
+      <div class="subtitle">Hankuk University of Foreign Studies</div>
     </div>
-    <h1>ICE GitOps Service</h1>
-    <div class="subtitle">Hankuk University of Foreign Studies</div>
   </header>
 
   <main>
     <div class="card intro">
       <h2>👋 환영합니다!</h2>
       <p><strong>정보통신공학과 학생 여러분을 위한 자동화 배포 시스템</strong>입니다.<br>
-        복잡한 인프라 설정 없이, 코드만 작성하면 자동으로 도메인 연결과 SSL 보안 적용까지 완료됩니다.</p>
+        복잡한 인프라 설정 없이, 소스 코드만 작성하면 자동으로 도메인 연결(SSL)과 배포가 완료됩니다.</p>
     </div>
 
     <div class="card features">
@@ -230,37 +263,34 @@
     </div>
 
     <div class="card contributors">
-      <h2>👨‍💻 System Administrators</h2>
-      <span class="lab-title">한국외국어대학교 정보통신공학과 ESE Lab</span>
+      <h2>👨‍💻 만든 사람들 (Contributors)</h2>
+      <div class="contributors-container">
+        <span class="lab-info">한국외국어대학교 정보통신공학과 ESE Lab 서버관리자</span>
 
-      <ul class="contributor-list">
-        <li>
-          <span class="contributor-badge">20학번</span>
-          <span class="contributor-name">이해준</span>
-        </li>
-        <li>
-          <span class="contributor-badge">21학번</span>
-          <span class="contributor-name">고태규</span>
-        </li>
-        <li>
-          <span class="contributor-badge">22학번</span>
-          <span class="contributor-name">김건우</span>
-        </li>
-      </ul>
-      <p style="margin-top: 1rem; font-size: 0.9rem; color: #888;">
-        본 서비스는 ESE Lab 서버관리팀에서 운영 및 유지보수를 담당하고 있습니다.
+        <div class="contributor-item">
+          <span class="badge">20학번</span> <span class="name">이해준</span>
+        </div>
+        <div class="contributor-item">
+          <span class="badge">21학번</span> <span class="name">고태규</span>
+        </div>
+        <div class="contributor-item">
+          <span class="badge">22학번</span> <span class="name">김건우</span>
+        </div>
+      </div>
+      <p style="margin-top: 1.5rem; font-size: 0.85rem; color: #999; text-align: right;">
+        &copy; HUFS ICE GitOps Project Team
       </p>
     </div>
 
     <div class="btn-container">
-      <a href="api.html" class="btn">API 상태 확인테스트 (Demo)</a>
+      <a href="api.html" class="btn">API 상태 확인 (Real-time Demo)</a>
     </div>
   </main>
 
   <footer>
-    <img src="hufs_logo.png" alt="HUFS Logo" style="height: 40px; opacity: 0.5; margin-bottom: 1rem;"><br>
-    &copy; 2026 HUFS Dept. of Information and Communications Engineering. All rights reserved.<br>
-    Powered by Kubernetes, ArgoCD & GitHub Actions
+    <img src="hufs_logo.png" alt="HUFS Logo" style="height: 30px; opacity: 0.4; margin-bottom: 1rem;"><br>
+    Dept. of Information and Communications Engineering<br>
+    Powered by Kubernetes, Cilium & ArgoCD
   </footer>
 </body>
 
