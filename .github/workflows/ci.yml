@@ -1,0 +1,92 @@
+# ============================================================
+# ICE GitOps - CI 파이프라인 템플릿
+# ============================================================
+# 사용법:
+#   1. 이 파일을 자신의 레포 .github/workflows/ci.yml 에 복사
+#   2. 아래 env 섹션의 PROJECT_NAME을 자신의 프로젝트명으로 변경
+#   3. main 브랜치에 push하면 자동으로 빌드 & 배포됩니다!
+# ============================================================
+
+name: CI - Build & Deploy
+
+on:
+  push:
+    branches: [main]
+
+env:
+  PROJECT_NAME: test  # ← 자신의 프로젝트명으로 변경!
+  REGISTRY: ghcr.io
+  GITOPS_REPO: ICEGitops/gitops  # GitOps Config 레포
+
+jobs:
+  build-and-push:
+    name: Build & Push Docker Image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    outputs:
+      image-tag: ${{ steps.meta.outputs.version }}
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/icegitops/${{ env.PROJECT_NAME }}
+          tags: |
+            type=sha,prefix=
+            type=raw,value=latest
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+  update-gitops:
+    name: Update GitOps Manifests
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout GitOps repo
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.GITOPS_REPO }}
+          token: ${{ secrets.GITOPS_TOKEN }}  # Organization secret
+          path: gitops
+
+      - name: Setup Kustomize
+        uses: imranismail/setup-kustomize@v2
+
+      - name: Update image tag
+        working-directory: gitops/projects/${{ env.PROJECT_NAME }}
+        run: |
+          kustomize edit set image \
+            ghcr.io/icegitops/PROJECT_NAME=ghcr.io/icegitops/${{ env.PROJECT_NAME }}:${{ github.sha }}
+          echo "✅ Updated image tag to ${{ github.sha }}"
+
+      - name: Commit and push
+        working-directory: gitops
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "🚀 deploy(${{ env.PROJECT_NAME }}): update image to ${{ github.sha }}"
+          git push
