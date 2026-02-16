@@ -236,6 +236,59 @@
       background-color: #fff;
       border-top: 1px solid #eee;
     }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.8rem;
+        /* 제목 크기 축소 */
+      }
+
+      .subtitle {
+        font-size: 1rem;
+      }
+
+      main {
+        margin-top: -1.5rem;
+        /* 헤더 겹침 정도 조절 */
+      }
+
+      .card {
+        padding: 1.5rem;
+        /* 카드 내부 여백 축소 */
+        margin-bottom: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      /* 컨트리뷰터 항목을 세로로 정렬하여 이메일 깨짐 방지 */
+      .contributor-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding: 0.8rem;
+      }
+
+      .badge {
+        margin-right: 0;
+        margin-bottom: 0.2rem;
+      }
+
+      /* 이메일 주소가 영역을 벗어나지 않게 설정 */
+      .contributor-item span[style*="margin-left: auto"] {
+        margin-left: 0 !important;
+        font-size: 0.8rem;
+        word-break: break-all;
+      }
+
+      .btn {
+        width: 100%;
+        /* 버튼을 화면 너비에 맞춤 */
+        padding: 1rem 0;
+        box-sizing: border-box;
+      }
+    }
   </style>
 </head>
 
