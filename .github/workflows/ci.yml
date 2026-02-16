@@ -46,7 +46,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/icegitops/${{ env.PROJECT_NAME }}
           tags: |
-            type=sha,prefix=
+            type=raw,value=${{ github.sha }}
             type=raw,value=latest
 
       - name: Build and push Docker image
